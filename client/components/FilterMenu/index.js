@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'proptypes';
 import { connect } from 'react-redux';
 import { toggleMenu as reduxToggleMenu } from '@reducers/ui';
-import { makeStyles } from '@material-ui/core/styles';
-
+import DateSelector from '@components/DateSelector';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,6 +11,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import GearButton from '../GearButton';
 
 const useStyles = makeStyles(theme => ({
@@ -51,9 +51,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const FilterMenu = ({
-  toggleMenu,
-}) => {
+const FilterMenu = ({ toggleMenu }) => {
   const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
 
@@ -67,14 +65,8 @@ const FilterMenu = ({
         }}
         title={(
           <>
-            <GearButton
-              aria-label="toggle map menu"
-              onClick={toggleMenu}
-            />
-            <Typography
-              className={classes.headerTitle}
-              component="span"
-            >
+            <GearButton aria-label="toggle map menu" onClick={toggleMenu} />
+            <Typography className={classes.headerTitle} component="span">
               FILTERS
             </Typography>
           </>
@@ -87,13 +79,14 @@ const FilterMenu = ({
             disableFocusRipple
             disableRipple
           >
-            {expanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon /> }
+            {expanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
           </IconButton>
         )}
       />
       <Collapse in={expanded}>
         <CardContent>
           TODO: Selectors
+          <DateSelector range />
         </CardContent>
       </Collapse>
     </Card>
